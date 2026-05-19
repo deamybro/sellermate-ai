@@ -1,0 +1,148 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 230 30% 98%;
+    --foreground: 240 28% 15%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 240 28% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 28% 15%;
+
+    --primary: 142 70% 49%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 230 10% 90%;
+    --secondary-foreground: 240 28% 15%;
+
+    --muted: 230 10% 94%;
+    --muted-foreground: 240 5% 45%;
+
+    --accent: 142 70% 95%;
+    --accent-foreground: 142 70% 30%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 240 6% 90%;
+    --input: 240 6% 90%;
+    --ring: 142 70% 49%;
+
+    --radius: 0.75rem;
+  }
+
+  .dark {
+    --background: 240 28% 15%;
+    --foreground: 230 30% 98%;
+
+    --card: 240 28% 20%;
+    --card-foreground: 230 30% 98%;
+
+    --popover: 240 28% 20%;
+    --popover-foreground: 230 30% 98%;
+
+    --primary: 142 70% 49%;
+    --primary-foreground: 240 28% 15%;
+
+    --secondary: 240 20% 25%;
+    --secondary-foreground: 230 30% 98%;
+
+    --muted: 240 20% 22%;
+    --muted-foreground: 240 10% 70%;
+
+    --accent: 142 70% 20%;
+    --accent-foreground: 142 70% 90%;
+
+    --destructive: 0 62% 40%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 240 20% 25%;
+    --input: 240 20% 25%;
+    --ring: 142 70% 49%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading font-bold tracking-tight;
+  }
+}
+
+/* Custom animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideInRight {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-12px); }
+}
+
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 15px rgba(37, 211, 102, 0.15); }
+  50% { box-shadow: 0 0 25px rgba(37, 211, 102, 0.35); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-slide-in-right {
+  animation: slideInRight 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 3s ease-in-out infinite;
+}
+
+/* Premium utility patterns */
+.bg-grid-pattern {
+  background-size: 32px 32px;
+  background-image: 
+    linear-gradient(to right, rgba(0, 0, 0, 0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.02) 1px, transparent 1px);
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.glass-pill {
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+/* Custom styles for printing invoices */
+@media print {
+  body {
+    background: white !important;
+    color: black !important;
+  }
+  .no-print {
+    display: none !important;
+  }
+}
