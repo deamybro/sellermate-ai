@@ -88,8 +88,9 @@ export default function ProductForm({
         image_url: imageUrl.trim() || null,
       })
       onClose()
-    } catch (err) {
-      const message = err instanceof Error ? err.message : 'Failed to save product. Please try again.'
+    } catch (err: any) {
+      console.error('Save product error details:', err)
+      const message = err?.message || err?.details || (typeof err === 'string' ? err : 'Failed to save product. Please try again.')
       setError(message)
     } finally {
       setLoading(false)
