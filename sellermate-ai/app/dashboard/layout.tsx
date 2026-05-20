@@ -21,11 +21,30 @@ export default async function DashboardLayout({
   }
 
   // Fetch seller info
-  const { data: seller } = await supabase
+  let { data: seller } = await supabase
     .from('sellers')
     .select('*')
     .eq('id', user.id)
     .single()
+
+  // Self-healing: if the auth user exists but the sellers database row is missing
+  // (e.g. database reset/re-init after signup), insert it automatically.
+  if (!seller) {
+    const { data: newSeller, error: createErr } = await supabase
+      .from('sellers')
+      .insert({
+        id: user.id,
+        store_name: 'My Store',
+        store_description: 'Welcome to our store!',
+        whatsapp_number: '1234567890',
+      })
+      .select()
+      .single()
+
+    if (!createErr && newSeller) {
+      seller = newSeller
+    }
+  }
 
   const storeName = seller?.store_name || 'My Store'
   const sellerId = user.id
